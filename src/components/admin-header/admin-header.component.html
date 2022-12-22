@@ -1,0 +1,31 @@
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <div class="container-fluid" >
+      <a class="navbar-brand"><h1>MusicBar</h1></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" (click)="allUsers()" ><h3>List All Users</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="allInstuments()" ><h3>List All Instruments</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="allTutors()" ><h3>List All Tutors</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="allSongSheets()" ><h3>List All SongSheets</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="allOrders()" ><h3>List All Orders</h3></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()" style="padding-left: 700px ;" href="http://localhost:4200/"><h3>Logout</h3></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

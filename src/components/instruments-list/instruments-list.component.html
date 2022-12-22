@@ -1,0 +1,134 @@
+<!-- <app-admin-header></app-admin-header> -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+		<table class="table">
+		  <thead>
+		    <tr>
+          <th scope="col">Instrument Id</th>
+          <th scope="col">Instrument Image</th>
+          <th scope="col">Instrument Name</th>
+          <th scope="col">Instrument Price</th>
+          <th scope="col">Instrument Description</th>
+          <th scope="col">Update</th>
+          <th scope="col">Delete</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr *ngFor="let instrument of instruments" >
+		      <th scope="row">{{instrument.inId}}</th>
+		      <td class="w-25"><img src="{{instrument.inImg}}" class="img-fluid img-thumbnail" alt="loading..."></td>
+		      <td>{{instrument.inName}}</td>
+		      <td>{{instrument.inPrice}}</td>
+		      <td>{{instrument.inDesc}}</td>
+          <td><button class="btn btn-success btn-md mb-3" (click)="openUpdateModal()"  (click)="updateInstrumentData(instrument)">Update</button></td>
+          <td><button class = "btn btn-danger" (click)="onDelete(instrument.inId)" >Delete</button></td>
+		    </tr>
+		  </tbody>
+		</table>
+    <button type="button" class="btn btn-success" (click)="openAddModal()">Add Instrument</button><br><br>   
+    </div>
+  </div>
+</div>
+    
+    <br><br>
+    
+    
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleAdd}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add</h4>
+        <button type="button" class="btn-close" (click)="closeAddModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <div class="container"><center>
+              <br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inName" name ="inName" #inName="ngModel" ngModel  [(ngModel)]="instrumentAdd.inName" required minlength="2" maxlength="25" >
+                  <label for="" class="label">Instrument Name</label><br>
+                  <small><div *ngIf="inName.errors?.['required'] && inName.touched" class="alert">*pls enter your name</div></small>
+                  <small><div *ngIf="inName.errors?.['minlength'] && inName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inImg" name ="inImg" #inImg="ngModel" ngModel  [(ngModel)]="instrumentAdd.inImg" required minlength="5" maxlength="100" >
+                  <label for="" class="label">Instrument Image</label><br>
+                  <small><div *ngIf="inImg.errors?.['required'] && inImg.touched" class="alert">*pls enter your email</div></small>
+                  <small><div *ngIf="inImg.errors?.['minlength'] && inImg.touched" class="alert">*pls enter vaild img path</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="number" class="input" id="inPrice" name ="inPrice" #inPrice="ngModel" ngModel  [(ngModel)]="instrumentAdd.inPrice" required minlength="1" maxlength="25" >
+                  <label for="" class="label">Instrument Price</label><br>
+                  <small><div *ngIf="inPrice.errors?.['required'] && inPrice.touched" class="alert">*pls enter your address</div></small>
+                  <small><div *ngIf="inPrice.errors?.['minlength'] && inPrice.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inDesc" name ="inDesc" #inDesc="ngModel" ngModel  [(ngModel)]="instrumentAdd.inDesc" required minlength="10" maxlength="1000" >
+                  <label for="" class="label">Instrument Description</label><br>
+                  <small><div *ngIf="inDesc.errors?.['required'] && inDesc.touched" class="alert">*pls enter you phone number</div></small>
+                  <small><div *ngIf="inDesc.errors?.['minlength'] && inDesc.touched" class="alert">*pls enter should be few words</div></small>
+              </div><br>
+            </center>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="submitBtn" (click)="addUser(instrumentAdd)">Add Instrument</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br><br>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleUpdate}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h4 class="modal-title">Update</h4>
+            <button type="button" class="btn-close" (click)="closeUpdateModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+          </div>
+      <div class="modal-body">
+      <form>
+          <div class="form-group">
+            <div class="container"><center>
+              <br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inNameUpdate" name ="inName" #inName="ngModel" ngModel  [(ngModel)]="instrumentUpadate.inName" required minlength="2" maxlength="25" >
+                  <label for="" class="label">Instrument Name</label><br>
+                  <small><div *ngIf="inName.errors?.['required'] && inName.touched" class="alert">*pls enter your name</div></small>
+                  <small><div *ngIf="inName.errors?.['minlength'] && inName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inImgUpdate" name ="inImg" #inImg="ngModel" ngModel  [(ngModel)]="instrumentUpadate.inImg" required minlength="5" maxlength="500" >
+                  <label for="" class="label">Instrument Image</label><br>
+                  <small><div *ngIf="inImg.errors?.['required'] && inImg.touched" class="alert">*pls enter your email</div></small>
+                  <small><div *ngIf="inImg.errors?.['minlength'] && inImg.touched" class="alert">*pls enter vaild img path</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="number" class="input" id="inPriceUpdate" name ="inPrice" #inPrice="ngModel" ngModel  [(ngModel)]="instrumentUpadate.inPrice" required minlength="1" maxlength="25" >
+                  <label for="" class="label">Instrument Price</label><br>
+                  <small><div *ngIf="inPrice.errors?.['required'] && inPrice.touched" class="alert">*pls enter your address</div></small>
+                  <small><div *ngIf="inPrice.errors?.['minlength'] && inPrice.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="inDescUpdate" name ="inDesc" #inDesc="ngModel" ngModel  [(ngModel)]="instrumentUpadate.inDesc" required minlength="10" maxlength="1000" >
+                  <label for="" class="label">Instrument Description</label><br>
+                  <small><div *ngIf="inDesc.errors?.['required'] && inDesc.touched" class="alert">*pls enter you phone number</div></small>
+                  <small><div *ngIf="inDesc.errors?.['minlength'] && inDesc.touched" class="alert">*pls enter should be few words</div></small>
+              </div><br>
+            </center>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="submitBtn" (click)="updateInstument()">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

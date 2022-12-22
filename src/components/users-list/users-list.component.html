@@ -1,0 +1,176 @@
+
+<!-- <app-admin-header></app-admin-header> -->
+<div class="container-fluid">
+    <br>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-dark">Users Table<Table></Table></h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <button type="button" class="btn btn-success" (click)="openAddModal()">Add User</button><br><br>
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>User Id</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>User Address</th>
+                            <th>User PhoneNO</th>
+                            <th>User Passwd</th>
+                            <th>User Type</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users " >
+                            <td>{{user.uId}}</td>
+                            <td>{{user.uName}}</td>
+                            <td>{{user.uEmail}}</td>
+                            <td>{{user.uAddress}}</td>
+                            <td>{{user.uPhoneNo}}</td>
+                            <td>{{user.uPassword}}</td>
+                            <td>{{user.uType}}</td>
+                            <td><button class="btn btn-success btn-md mb-3" (click)="openUpdateModal()"  (click)="updateUserData(user)">Update</button></td>
+                            <td><button class = "btn btn-danger" (click)="onDelete(user.uId)" >Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleAdd}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add</h4>
+        <button type="button" class="btn-close" (click)="closeAddModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <div class="container"><center>
+              <br><br>
+              <div class="inputContainer">
+                <input type="text" class="input" id="uId" name ="uId" #uId="ngModel" ngModel  [(ngModel)]="userAdd.uId" required minlength="1" maxlength="25" >
+                <label for="" class="label">User Id</label><br>
+                <small><div *ngIf="uId.errors?.['required'] && uId.touched" class="alert">*pls enter your id</div></small>
+                <small><div *ngIf="uId.errors?.['minlength'] && uId.touched" class="alert">*pls enter should be minimun 1 number</div></small>
+            </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uName" name ="uName" #uName="ngModel" ngModel  [(ngModel)]="userAdd.uName" required minlength="2" maxlength="25" >
+                  <label for="" class="label">Name</label><br>
+                  <small><div *ngIf="uName.errors?.['required'] && uName.touched" class="alert">*pls enter your name</div></small>
+                  <small><div *ngIf="uName.errors?.['minlength'] && uName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="email" class="input" id="uEmail" name ="uEmail" #uEmail="ngModel" ngModel  [(ngModel)]="userAdd.uEmail" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Email</label><br>
+                  <small><div *ngIf="uEmail.errors?.['required'] && uEmail.touched" class="alert">*pls enter your email</div></small>
+                  <small><div *ngIf="uEmail.errors?.['minlength'] && uEmail.touched" class="alert">*pls enter should be @ with vaild mail</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uAddress" name ="uAddress" #uAddress="ngModel" ngModel  [(ngModel)]="userAdd.uAddress" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Address</label><br>
+                  <small><div *ngIf="uAddress.errors?.['required'] && uAddress.touched" class="alert">*pls enter your address</div></small>
+                  <small><div *ngIf="uAddress.errors?.['minlength'] && uAddress.touched" class="alert">*pls enter should be minimun five letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="number" class="input" id="uPhoneNo" name ="uPhoneNo" #uPhoneNo="ngModel" ngModel  [(ngModel)]="userAdd.uPhoneNo" required minlength="10" maxlength="10" >
+                  <label for="" class="label">Phone Number</label><br>
+                  <small><div *ngIf="uPhoneNo.errors?.['required'] && uPhoneNo.touched" class="alert">*pls enter you phone number</div></small>
+                  <small><div *ngIf="uPhoneNo.errors?.['minlength'] && uPhoneNo.touched" class="alert">*pls enter should be minimun ten numebr</div></small>
+              </div><br>
+              <div class="inputContainer">
+                <input type="password" class="input" id="uPassword" name ="uPassword" #uPassword="ngModel" ngModel  [(ngModel)]="userAdd.uPassword" required minlength="8" maxlength="20" >
+                <label for="" class="label">Password</label><br>
+                <small><div *ngIf="uPassword.errors?.['required'] && uPassword.touched" class="alert">*pls enter your password</div></small>
+                <small><div *ngIf="uPassword.errors?.['minlength'] && uPassword.touched" class="alert">*pls enter should be minimun eight letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                <input type="text" class="input" id="uType" name ="uType" #uType="ngModel" ngModel  [(ngModel)]="userAdd.uType" required minlength="4" maxlength="5" >
+                <label for="" class="label">User Type</label><br>
+                <small><div *ngIf="uType.errors?.['required'] && uType.touched" class="alert">*pls enter your user type</div></small>
+                <small><div *ngIf="uType.errors?.['minlength'] && uType.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+            </center>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="submitBtn" (click)="addUser(userAdd)">Add User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br><br>
+
+<div class="modal" id="myModal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleUpdate}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h4 class="modal-title">Update</h4>
+            <button type="button" class="btn-close" (click)="closeUpdateModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+          </div>
+      <div class="modal-body">
+      <form>
+          <div class="form-group">
+            <div class="container"><center>
+              <br><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uNameUpdate" name ="uName" #uName="ngModel" ngModel  [(ngModel)]="userUpdate.uName" required minlength="2" maxlength="25" >
+                  <label for="" class="label">Name</label><br>
+                  <small><div *ngIf="uName.errors?.['required'] && uName.touched" class="alert">* pls enter your name</div></small>
+                  <small><div *ngIf="uName.errors?.['minlength'] && uName.touched" class="alert">* pls enter should be minimun two letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="email" class="input" id="uEmailUpdate" name ="uEmail" #uEmail="ngModel" ngModel  [(ngModel)]="userUpdate.uEmail" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Email</label><br>
+                  <small><div *ngIf="uEmail.errors?.['required'] && uEmail.touched" class="alert">* pls enter your email</div></small>
+                  <small><div *ngIf="uEmail.errors?.['minlength'] && uEmail.touched" class="alert">* pls enter should be @ with vaild mail</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uAddressUpdate" name ="uAddress" #uAddress="ngModel" ngModel  [(ngModel)]="userUpdate.uAddress" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Address</label><br>
+                  <small><div *ngIf="uAddress.errors?.['required'] && uAddress.touched" class="alert">* pls enter your address</div></small>
+                  <small><div *ngIf="uAddress.errors?.['minlength'] && uAddress.touched" class="alert">* pls enter should be minimun five letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="number" class="input" id="uPhoneNoUpdate" name ="uPhoneNo" #uPhoneNo="ngModel" ngModel  [(ngModel)]="userUpdate.uPhoneNo" required minlength="10" maxlength="10" >
+                  <label for="" class="label">Phone Number</label><br>
+                  <small><div *ngIf="uPhoneNo.errors?.['required'] && uPhoneNo.touched" class="alert">*pls enter you phone number</div></small>
+                  <small><div *ngIf="uPhoneNo.errors?.['minlength'] && uPhoneNo.touched" class="alert">*pls enter should be minimun ten numebr</div></small>
+              </div><br>
+              <div class="inputContainer">
+                <input type="password" class="input" id="uPasswordUpdate" name ="uPassword" #uPassword="ngModel" ngModel  [(ngModel)]="userUpdate.uPassword" required minlength="8" maxlength="20" >
+                <label for="" class="label">Password</label><br>
+                <small><div *ngIf="uPassword.errors?.['required'] && uPassword.touched" class="alert">*pls enter your password</div></small>
+                <small><div *ngIf="uPassword.errors?.['minlength'] && uPassword.touched" class="alert">*pls enter should be minimun eight letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                <input type="text" class="input" id="uTypeUpdate" name ="uType" #uType="ngModel" ngModel  [(ngModel)]="userUpdate.uType" required minlength="4" maxlength="5" >
+                <label for="" class="label">User Type</label><br>
+                <small><div *ngIf="uType.errors?.['required'] && uType.touched" class="alert">*pls enter your user type</div></small>
+                <small><div *ngIf="uType.errors?.['minlength'] && uType.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+            </center>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="submitBtn" (click)="updateUser()">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

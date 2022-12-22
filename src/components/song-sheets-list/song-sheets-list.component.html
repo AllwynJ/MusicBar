@@ -1,0 +1,150 @@
+
+
+<!-- <app-admin-header></app-admin-header> -->
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+            <th scope="col">SongSheets Id</th>
+            <th scope="col">SongSheets Image</th>
+            <th scope="col">SongSheets Name</th>
+            <th scope="col">SongSheets Desc</th>
+            <th scope="col">SongSheets Writer</th>
+            <th scope="col">SongSheets Price</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let songsheet of songsheets" >
+                <th scope="row">{{songsheet.sId}}</th>
+                <td class="w-25"><img src="{{songsheet.sImg}}" class="img-fluid img-thumbnail" alt="loading..."></td>
+                <td>{{songsheet.sName}}</td>
+                <td>{{songsheet.sDesc}}</td>
+                <td>{{songsheet.sWriter}}</td>
+                <td>{{songsheet.sPrice}}</td>
+            <td><button class="btn btn-success btn-md mb-3" (click)="openUpdateModal()"  (click)="updateSongSheetData(songsheet)">Update</button></td>
+            <td><button class = "btn btn-danger" (click)="onDelete(songsheet.sId)" >Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+      <button type="button" class="btn btn-success" (click)="openAddModal()">Add SongSheets</button><br><br>   
+      </div>
+    </div>
+  </div>
+      
+      <br><br>
+      
+      
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleAdd}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add</h4>
+          <button type="button" class="btn-close" (click)="closeAddModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <div class="container"><center>
+                <br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sNameUpdate" name ="sName" #sName="ngModel" ngModel  [(ngModel)]="songsheetAdd.sName" required minlength="2" maxlength="25" >
+                    <label for="" class="label">SongSheet Name</label><br>
+                    <small><div *ngIf="sName.errors?.['required'] && sName.touched" class="alert">*pls enter your name</div></small>
+                    <small><div *ngIf="sName.errors?.['minlength'] && sName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sImgUpdate" name ="sImg" #sImg="ngModel" ngModel  [(ngModel)]="songsheetAdd.sImg" required minlength="1" maxlength="255" >
+                    <label for="" class="label">SongSheet Image</label><br>
+                    <small><div *ngIf="sImg.errors?.['required'] && sImg.touched" class="alert">*pls enter your address</div></small>
+                    <small><div *ngIf="sImg.errors?.['minlength'] && sImg.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sPriceUpdate" name ="sWriter" #sWriter="ngModel" ngModel  [(ngModel)]="songsheetAdd.sWriter" required minlength="1" maxlength="25" >
+                    <label for="" class="label">SongSheets Writer</label><br>
+                    <small><div *ngIf="sWriter.errors?.['required'] && sWriter.touched" class="alert">*pls enter your price</div></small>
+                    <small><div *ngIf="sWriter.errors?.['minlength'] && sWriter.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sDescUpdate" name ="sDesc" #sDesc="ngModel" ngModel  [(ngModel)]="songsheetAdd.sDesc" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">SongSheet Description</label><br>
+                    <small><div *ngIf="sDesc.errors?.['required'] && sDesc.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="sDesc.errors?.['minlength'] && sDesc.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="number" class="input" id="sPriceUpdate" name ="sPrice" #sPrice="ngModel" ngModel  [(ngModel)]="songsheetAdd.sPrice" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">SongSheet Price</label><br>
+                    <small><div *ngIf="sPrice.errors?.['required'] && sPrice.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="sPrice.errors?.['minlength'] && sPrice.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+              </center>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="submitBtn" (click)="addUser(songsheetAdd)">Add SongSheet</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <br><br>
+  
+  <div class="modal" id="myModal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleUpdate}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+              <h4 class="modal-title">Update</h4>
+              <button type="button" class="btn-close" (click)="closeUpdateModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+            </div>
+        <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <div class="container"><center>
+                <br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sNameUpdate" name ="sName" #sName="ngModel" ngModel  [(ngModel)]="songsheetUpadate.sName" required minlength="2" maxlength="25" >
+                    <label for="" class="label">SongSheet Name</label><br>
+                    <small><div *ngIf="sName.errors?.['required'] && sName.touched" class="alert">*pls enter your name</div></small>
+                    <small><div *ngIf="sName.errors?.['minlength'] && sName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sImgUpdate" name ="sImg" #sImg="ngModel" ngModel  [(ngModel)]="songsheetUpadate.sImg" required minlength="1" maxlength="255" >
+                    <label for="" class="label">SongSheet Image</label><br>
+                    <small><div *ngIf="sImg.errors?.['required'] && sImg.touched" class="alert">*pls enter your address</div></small>
+                    <small><div *ngIf="sImg.errors?.['minlength'] && sImg.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sPriceUpdate" name ="sWriter" #sWriter="ngModel" ngModel  [(ngModel)]="songsheetUpadate.sWriter" required minlength="1" maxlength="25" >
+                    <label for="" class="label">SongSheets Writer</label><br>
+                    <small><div *ngIf="sWriter.errors?.['required'] && sWriter.touched" class="alert">*pls enter your price</div></small>
+                    <small><div *ngIf="sWriter.errors?.['minlength'] && sWriter.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="sDescUpdate" name ="sDesc" #sDesc="ngModel" ngModel  [(ngModel)]="songsheetUpadate.sDesc" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">SongSheet Description</label><br>
+                    <small><div *ngIf="sDesc.errors?.['required'] && sDesc.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="sDesc.errors?.['minlength'] && sDesc.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="number" class="input" id="sPriceUpdate" name ="sPrice" #sPrice="ngModel" ngModel  [(ngModel)]="songsheetUpadate.sPrice" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">SongSheet Price</label><br>
+                    <small><div *ngIf="sPrice.errors?.['required'] && sPrice.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="sPrice.errors?.['minlength'] && sPrice.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+              </center>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="submitBtn" (click)="updateSongSheet()">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

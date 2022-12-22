@@ -1,0 +1,25 @@
+
+<br><br>
+        <ul>
+          <li *ngFor="let instrument of instruments">
+            <a>
+              <img src="{{ instrument.inImg }}" alt="" />
+              <div class="content">
+                <div class="name">
+                  {{ instrument.inName }}
+                </div>
+                <div class="price">
+                  <span
+                    >&#8377;
+                    {{ instrument.inPrice }}
+                  </span>
+                </div>
+                  <button type="button" class="btn btn-outline-info" (click)="goToUserCart(instrument.inId)">Add to cart</button>
+                  <button type="button" class="btn btn-outline-info" style="margin-left: 40px;"  (click)="GoToPaymentPage(instrument)" >Buy Now</button>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+<router-outlet></router-outlet>
+

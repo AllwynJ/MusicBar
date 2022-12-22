@@ -1,0 +1,112 @@
+<!-- <router-outlet></router-outlet> -->
+<section class="vh-100" style="background-color: #2f2f2f;"> 
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-5">
+          <div class="card" style="border-radius: 1rem;">
+            <div class="row g-0">
+              <div class="col-md-12 col-lg-12 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+  
+                  <form #loginForm ="ngForm" (ngSubmit)=login(loginForm.value) nonvalidate>
+  
+                    <div class="d-flex align-items-center mb-3 pb-1">
+                      <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                      <span class="h1 fw-bold mb-0">Login</span>
+                    </div>
+  
+                    <h5 class="fw-normal" style="letter-spacing: 1px;">Sign into your account</h5>
+  
+                    <div class="form-outline">
+                      <div class="form-floating mb-3">
+                        <input type="text" ngModel name ="userName" #userName="ngModel" class="form-control" id="floatingInput" placeholder="User Name">
+                        <label for="floatingInput">User Name</label>
+                      </div>
+                    </div>
+  
+                    <div class="form-outline mb-12">
+                        <div class="form-floating">
+                          <input type="password" ngModel name ="userPwd" #userPwd="ngModel" class="form-control" id="floatingPassword" placeholder="Password">
+                          <label for="floatingPassword">Password</label>
+                        </div>
+                    </div><br>
+                    <div class="pt-1 mb-4">
+                      <button type="submit" class="btn btn-dark btn-lg btn-block">Login</button>
+                    </div>
+  
+                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a (click)="register()"
+                        style="color: #393f81;">Register here</a></p>
+                  </form>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleAdd}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Register</h4>
+        <button type="button" class="btn-close" (click)="closeAddModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <div class="container"><center>
+              <br><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uName" name ="uName" #uName="ngModel" ngModel  [(ngModel)]="userAdd.uName" required minlength="2" maxlength="25" >
+                  <label for="" class="label">Name</label><br>
+                  <small><div *ngIf="uName.errors?.['required'] && uName.touched" class="alert">*pls enter your name</div></small>
+                  <small><div *ngIf="uName.errors?.['minlength'] && uName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="email" class="input" id="uEmail" name ="uEmail" #uEmail="ngModel" ngModel  [(ngModel)]="userAdd.uEmail" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Email</label><br>
+                  <small><div *ngIf="uEmail.errors?.['required'] && uEmail.touched" class="alert">*pls enter your email</div></small>
+                  <small><div *ngIf="uEmail.errors?.['minlength'] && uEmail.touched" class="alert">*pls enter should be @ with vaild mail</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="text" class="input" id="uAddress" name ="uAddress" #uAddress="ngModel" ngModel  [(ngModel)]="userAdd.uAddress" required minlength="5" maxlength="25" >
+                  <label for="" class="label">Address</label><br>
+                  <small><div *ngIf="uAddress.errors?.['required'] && uAddress.touched" class="alert">*pls enter your address</div></small>
+                  <small><div *ngIf="uAddress.errors?.['minlength'] && uAddress.touched" class="alert">*pls enter should be minimun five letters</div></small>
+              </div><br>
+              <div class="inputContainer">
+                  <input type="number" class="input" id="uPhoneNo" name ="uPhoneNo" #uPhoneNo="ngModel" ngModel  [(ngModel)]="userAdd.uPhoneNo" required minlength="10" maxlength="10" >
+                  <label for="" class="label">Phone Number</label><br>
+                  <small><div *ngIf="uPhoneNo.errors?.['required'] && uPhoneNo.touched" class="alert">*pls enter you phone number</div></small>
+                  <small><div *ngIf="uPhoneNo.errors?.['minlength'] && uPhoneNo.touched" class="alert">*pls enter should be minimun ten numebr</div></small>
+              </div><br>
+              <div class="inputContainer">
+                <input type="password" class="input" id="uPassword" name ="uPassword" #uPassword="ngModel" ngModel  [(ngModel)]="userAdd.uPassword" required minlength="8" maxlength="20" >
+                <label for="" class="label">Password</label><br>
+                <small><div *ngIf="uPassword.errors?.['required'] && uPassword.touched" class="alert">*pls enter your password</div></small>
+                <small><div *ngIf="uPassword.errors?.['minlength'] && uPassword.touched" class="alert">*pls enter should be minimun eight letters</div></small>
+              </div><br>
+
+            </center>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="submitBtn" (click)="addUser(userAdd)">Add User</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

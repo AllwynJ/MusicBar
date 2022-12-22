@@ -1,0 +1,135 @@
+
+<!-- <app-admin-header></app-admin-header> -->
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+            <th scope="col">Tutor Id</th>
+            <th scope="col">Tutor Image</th>
+            <th scope="col">Tutor Name</th>
+            <th scope="col">Tutor Price</th>
+            <th scope="col">Tutor Description</th>
+            <th scope="col">Update</th>
+            <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tutor of tutors" >
+                <th scope="row">{{tutor.tId}}</th>
+                <td class="w-25"><img src="{{tutor.tImg}}" class="img-fluid img-thumbnail" alt="loading..."></td>
+                <td>{{tutor.tName}}</td>
+                <td>{{tutor.tFee}}</td>
+                <td>{{tutor.tDesc}}</td>
+            <td><button class="btn btn-success btn-md mb-3" (click)="openUpdateModal()"  (click)="updateTutorData(tutor)">Update</button></td>
+            <td><button class = "btn btn-danger" (click)="onDelete(tutor.tId)" >Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
+      <button type="button" class="btn btn-success" (click)="openAddModal()">Add Tutor</button><br><br>   
+      </div>
+    </div>
+  </div>
+      
+      <br><br>
+      
+      
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleAdd}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add</h4>
+          <button type="button" class="btn-close" (click)="closeAddModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <div class="container"><center>
+                <br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tName" name ="tName" #tName="ngModel" ngModel  [(ngModel)]="tutorAdd.tName" required minlength="2" maxlength="25" >
+                    <label for="" class="label">Tutor Name</label><br>
+                    <small><div *ngIf="tName.errors?.['required'] && tName.touched" class="alert">*pls enter your name</div></small>
+                    <small><div *ngIf="tName.errors?.['minlength'] && tName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tImg" name ="tImg" #tImg="ngModel" ngModel  [(ngModel)]="tutorAdd.tImg" required minlength="5" maxlength="100" >
+                    <label for="" class="label">Tutor Image</label><br>
+                    <small><div *ngIf="tImg.errors?.['required'] && tImg.touched" class="alert">*pls enter your email</div></small>
+                    <small><div *ngIf="tImg.errors?.['minlength'] && tImg.touched" class="alert">*pls enter vaild img path</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="number" class="input" id="tPrice" name ="tPrice" #tPrice="ngModel" ngModel  [(ngModel)]="tutorAdd.tFee" required minlength="1" maxlength="25" >
+                    <label for="" class="label">Tutor Price</label><br>
+                    <small><div *ngIf="tPrice.errors?.['required'] && tPrice.touched" class="alert">*pls enter your address</div></small>
+                    <small><div *ngIf="tPrice.errors?.['minlength'] && tPrice.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tDesc" name ="tDesc" #tDesc="ngModel" ngModel  [(ngModel)]="tutorAdd.tDesc" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">Tutor Description</label><br>
+                    <small><div *ngIf="tDesc.errors?.['required'] && tDesc.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="tDesc.errors?.['minlength'] && tDesc.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+              </center>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="submitBtn" (click)="addUser(tutorAdd)">Add Tutor</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <br><br>
+  
+  <div class="modal" id="myModal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayStyleUpdate}">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+              <h4 class="modal-title">Update</h4>
+              <button type="button" class="btn-close" (click)="closeUpdateModal()" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+            </div>
+        <div class="modal-body">
+        <form>
+            <div class="form-group">
+              <div class="container"><center>
+                <br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tNameUpdate" name ="tName" #tName="ngModel" ngModel  [(ngModel)]="tutorUpadate.tName" required minlength="2" maxlength="25" >
+                    <label for="" class="label">Tutor Name</label><br>
+                    <small><div *ngIf="tName.errors?.['required'] && tName.touched" class="alert">*pls enter your name</div></small>
+                    <small><div *ngIf="tName.errors?.['minlength'] && tName.touched" class="alert">*pls enter should be minimun two letters</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tImgUpdate" name ="tImg" #tImg="ngModel" ngModel  [(ngModel)]="tutorUpadate.tImg" required minlength="5" maxlength="500" >
+                    <label for="" class="label">Tutor Image</label><br>
+                    <small><div *ngIf="tImg.errors?.['required'] && tImg.touched" class="alert">*pls enter your Image</div></small>
+                    <small><div *ngIf="tImg.errors?.['minlength'] && tImg.touched" class="alert">*pls enter vaild img path</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="number" class="input" id="tPriceUpdate" name ="tPrice" #tPrice="ngModel" ngModel  [(ngModel)]="tutorUpadate.tFee" required minlength="1" maxlength="25" >
+                    <label for="" class="label">Tutor Price</label><br>
+                    <small><div *ngIf="tPrice.errors?.['required'] && tPrice.touched" class="alert">*pls enter your price</div></small>
+                    <small><div *ngIf="tPrice.errors?.['minlength'] && tPrice.touched" class="alert">*pls enter should be minimun one rupees</div></small>
+                </div><br>
+                <div class="inputContainer">
+                    <input type="text" class="input" id="tDescUpdate" name ="tDesc" #tDesc="ngModel" ngModel  [(ngModel)]="tutorUpadate.tDesc" required minlength="10" maxlength="1000" >
+                    <label for="" class="label">Tutor Description</label><br>
+                    <small><div *ngIf="tDesc.errors?.['required'] && tDesc.touched" class="alert">*pls enter you phone number</div></small>
+                    <small><div *ngIf="tDesc.errors?.['minlength'] && tDesc.touched" class="alert">*pls enter should be few words</div></small>
+                </div><br>
+              </center>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="submitBtn" (click)="updateTutor()">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
